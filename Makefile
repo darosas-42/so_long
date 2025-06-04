@@ -18,6 +18,8 @@ LIBFT = $(LIBFT_PATH)/libft.a
 MLX42_PATH = ./MLX42/build
 MLX42 = $(MLX42_PATH)/libmlx42.a
 
+MLX42MAKEFILE = ./MLX42/build/Makefile
+
 SRC = src
 
 SRCB = srcb
@@ -43,7 +45,7 @@ OBJECTS = $(FILES:.c=.o)
 
 OBJECTS_BONUS = $(FILES_BONUS:.c=.o)
 
-$(NAME): $(OBJECTS) $(LIBFT) $(MLX42)
+$(NAME): $(MLX42) $(OBJECTS) $(LIBFT)
 	$(CC) $(FLAGS) $(OBJECTS) $(MLX42) $(LIBFT) $(LIB_SYS) -o $(NAME)
 
 $(OBJECTS):	src/%.o : src/%.c
@@ -52,12 +54,18 @@ $(OBJECTS):	src/%.o : src/%.c
 $(LIBFT):
 	make -s -C $(LIBFT_PATH)
 
-$(MLX42):
+$(MLX42): mlx42
 	make -s -C $(MLX42_PATH)
 
 all: $(NAME)
 
-bonus: $(NAME_BONUS)
+bonus: mlx42 $(NAME_BONUS)
+
+mlx42:
+	@if [ ! -f "$(MLX42MAKEFILE)" ]; then \
+		cd MLX42 && cmake -B build; \
+	fi
+	
 
 $(NAME_BONUS): $(OBJECTS_BONUS) $(LIBFT) $(MLX42)
 	cc $(FLAGS) $(OBJECTS_BONUS) $(LIBFT) $(MLX42) $(LIB_SYS) -o $(NAME_BONUS)
@@ -76,4 +84,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all re clean fclean bonus
+.PHONY: all mlx42 re clean fclean bonus
