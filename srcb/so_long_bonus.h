@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:09:39 by drosas-n          #+#    #+#             */
-/*   Updated: 2025/06/02 17:36:40 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/06/05 17:22:02 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,6 @@ void	keyhook(mlx_key_data_t keydata, void *p);
 void	screen_counter(t_game *game);
 void	move_enemy(t_game *game);
 void	move_enemy2(t_game *game);
+int		check_things(t_game *game);
+
 #endif

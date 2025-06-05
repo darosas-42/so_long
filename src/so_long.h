@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:10:32 by drosas-n          #+#    #+#             */
-/*   Updated: 2025/06/02 17:33:42 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/06/05 17:18:05 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ int		create_image(t_game *g);
 void	init_game(t_game *g);
 void	close_game(void *p);
 void	keyhook(mlx_key_data_t keydata, void *p);
+int		check_things(t_game *game);
 
 #endif

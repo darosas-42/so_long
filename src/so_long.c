@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:10:25 by drosas-n          #+#    #+#             */
-/*   Updated: 2025/06/02 17:57:13 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/06/05 17:07:05 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	check_map(t_game *game, char **argv)
 	if (other_walls(game) == EXIT_FAILURE)
 		return (free_all(game), EXIT_FAILURE);
 	if (things(game) == EXIT_FAILURE)
+		return (free_all(game), EXIT_FAILURE);
+	if (check_things(game) == EXIT_FAILURE)
 		return (free_all(game), EXIT_FAILURE);
 	if (valid_way(game) == EXIT_FAILURE)
 		return (free_all(game), EXIT_FAILURE);

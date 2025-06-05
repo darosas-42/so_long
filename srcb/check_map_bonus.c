@@ -6,7 +6,7 @@
 /*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:08:32 by drosas-n          #+#    #+#             */
-/*   Updated: 2025/06/02 17:59:11 by darosas-         ###   ########.fr       */
+/*   Updated: 2025/06/05 17:21:08 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,25 @@ int	things(t_game *game)
 	}
 	if (game->c_player != 1 || game->c_exit != 1 || game->c_collect < 1)
 		return (ft_printf("Error\nInvalid elements.\n"), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	check_things(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (game->map[++i])
+	{
+		j = -1;
+		while (game->map[i][++j])
+		{
+			if (game->map[i][j] != '0' && game->map[i][j] != '1'
+				&& game->map[i][j] != 'C' && game->map[i][j] != 'E'
+				&& game->map[i][j] != 'P' && game->map[i][j] != 'N')
+				return (ft_printf("Error\nInvalid map.\n"), EXIT_FAILURE);
+		}
+	}
 	return (EXIT_SUCCESS);
 }
