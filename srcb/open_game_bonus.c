@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   open_game_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drosas-n <drosas-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darosas- <darosas-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:09:17 by drosas-n          #+#    #+#             */
-/*   Updated: 2024/08/28 17:09:18 by drosas-n         ###   ########.fr       */
+/*   Updated: 2025/06/05 17:47:24 by darosas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-int	create_image2(t_game *g)
-{
-	if (!g->t_s || !g->t_m || !g->t_p1 || !g->t_pu
-		|| !g->t_pl || !g->t_pr || !g->t_c
-		|| !g->t_e1 || !g->t_e2 || !g->i_s || !g->i_m || !g->i_p1
-		|| !g->i_pu || !g->i_pl || !g->i_pr || !g->i_c || !g->i_e1 || !g->i_e2
-		|| !g->i_n1 || !g->i_n2)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
 
 static void	clean_textures(t_game *g)
 {
@@ -38,7 +27,7 @@ static void	clean_textures(t_game *g)
 	mlx_delete_texture(g->t_n2);
 }
 
-int	create_image(t_game *g)
+static int	create_texture(t_game *g)
 {
 	g->t_s = mlx_load_png("./sprites/s.png");
 	g->t_m = mlx_load_png("./sprites/m.png");
@@ -51,6 +40,16 @@ int	create_image(t_game *g)
 	g->t_e2 = mlx_load_png("./sprites/e2.png");
 	g->t_n1 = mlx_load_png("./sprites/n1.png");
 	g->t_n2 = mlx_load_png("./sprites/n2.png");
+	if (!g->t_s || !g->t_m || !g->t_p1 || !g->t_pu || !g->t_pl || !g->t_pr
+		|| !g->t_c || !g->t_e1 || !g->t_e2 || !g->t_n1 || !g->t_n2)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	create_image(t_game *g)
+{
+	if (create_texture(g) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	g->i_s = mlx_texture_to_image(g->mlx, g->t_s);
 	g->i_m = mlx_texture_to_image(g->mlx, g->t_m);
 	g->i_p1 = mlx_texture_to_image(g->mlx, g->t_p1);
@@ -62,9 +61,11 @@ int	create_image(t_game *g)
 	g->i_e2 = mlx_texture_to_image(g->mlx, g->t_e2);
 	g->i_n1 = mlx_texture_to_image(g->mlx, g->t_n1);
 	g->i_n2 = mlx_texture_to_image(g->mlx, g->t_n2);
-	if (create_image2(g) == EXIT_FAILURE)
+	if (!g->i_s || !g->i_m || !g->i_p1 || !g->i_pu || !g->i_pl || !g->i_pr
+		|| !g->i_c || !g->i_e1 || !g->i_e2 || !g->i_n1 || !g->i_n2)
 		return (EXIT_FAILURE);
-	return (clean_textures(g), EXIT_SUCCESS);
+	clean_textures(g);
+	return (EXIT_SUCCESS);
 }
 
 void	init_game(t_game *g)
